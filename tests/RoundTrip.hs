@@ -13,6 +13,7 @@
 --
 module RoundTrip where
 
+import qualified Data.Aeson.KeyMap as KeyMap
 import Data.Serialize
 import Data.Serialize.Get
 import Data.Serialize.Put
@@ -72,7 +73,7 @@ tests  = testGroup "Round Trip"
   , testProperty "Value with String Round Trip "
     $ roundTrip put get (A.String "abc")
   , testProperty "Value with Object Round Trip "
-    $ roundTrip put get (A.Object $ HM.insert "abc" (A.String "abc") HM.empty)
+    $ roundTrip put get (A.Object $ KeyMap.insert "abc" (A.String "abc") KeyMap.empty)
   ]
 
 timeTests :: LocalTime -> UTCTime -> Test
